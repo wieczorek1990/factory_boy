@@ -373,6 +373,14 @@ class DjangoNonIntegerPkTestCase(django_test.TestCase):
         self.assertEqual('foo0', nonint2.foo)
         self.assertEqual('foo0', nonint2.pk)
 
+    def test_setup_next_sequence(self):
+        nonint1 = models.NonIntegerPk.objects.create(pk='foo0')
+        self.assertEqual('foo0', nonint1.foo)
+        self.assertEqual('foo0', nonint1.pk)
+        nonint2 = NonIntegerPkFactory.create()
+        self.assertEqual('foo1', nonint2.foo)
+        self.assertEqual('foo1', nonint2.pk)
+
 
 class DjangoAbstractBaseSequenceTestCase(django_test.TestCase):
     def test_auto_sequence_son(self):
